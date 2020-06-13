@@ -6,8 +6,12 @@ POST http://localhost:3000/subscribers
 Content-Type: application/json
 
 {
-  "name": "Robert",
-  "subscribedChannel": "Bennetts Channel"
+  "name": "Michael",
+  "subscribedChannel": "Best south dishes",
+  "recipe": {
+      "name": "Bisibele bath",
+      "ingredients": "Rice, noodles, lentils, water"
+  }
 }
 
 ####
@@ -17,3 +21,17 @@ GET http://localhost:3000/subscribers/5ee07e07daf3461adfe12c57
 ####
 
 DELETE http://localhost:3000/subscribers/5ee07e07daf3461adfe12c57
+
+
+####
+
+PATCH http://localhost:3000/subscribers/5ee4548534638d33661e645b
+
+{
+  "name": null,
+  "subscribedChannel": null,
+  "recipe": {
+      "name": "Bisibele bath",
+      "ingredients": "Rice, noodles, lentils, water"
+  }
+}

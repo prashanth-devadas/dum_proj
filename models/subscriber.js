@@ -5,15 +5,15 @@ const subscriberSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    subscribedChannel : {
-        type: String,
-        required: true
-    },
     subscribeDate : {
         type: Date,
         required: true,
         default: Date.now
-    }
+    },
+    recipe: {
+        type: String,
+        required: true
+    },
 });
 
 module.exports = mongoose.model('Subscriber', subscriberSchema);

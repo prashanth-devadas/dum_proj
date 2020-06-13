@@ -21,7 +21,24 @@ router.get('/:id', getSubscriber, (req, res) => {
 router.post('/', async (req, res)=> {
     const subscriber = new Subscriber({
         name: req.body.name,
-        subscribedChannel: req.body.subscribedChannel
+        subscribedChannel: req.body.subscribedChannel,
+        recipe: JSON.stringify(req.body.recipe)
+    })
+
+    try {
+        const newSubscriber = await subscriber.save()
+        res.status(201).json(newSubscriber)
+    } catch (err) {
+        res.status(400).json({ message: err.message});
+    }
+});
+
+// Create a recipe with a new name
+router.post('/', async (req, res)=> {
+    const subscriber = new Subscriber({
+        name: req.body.name,
+        subscribedChannel: req.body.subscribedChannel,
+        recipe: req.body.recipe
     })
 
     try {
@@ -33,8 +50,25 @@ router.post('/', async (req, res)=> {
 });
 
 // Update one subscriber
-router.patch('/:id', getSubscriber, (req, res) => {
+router.patch('/:id', getSubscriber, async (req, res) => {
+    if(req.body.name !== null){
+        res.subscriber.name = req.body.name;
+    }
 
+    if(req.body.subscribedChannel !== null){
+        res.subscriber.subscribedChannel = req.body.subscribedChannel;
+    }
+
+    if(req.body.recipe !== null){
+        res.subscriber.recipe = req.body.recipe;
+    }
+
+    try {
+        const updatedSubscriber = await res.subscriber.save();
+        res.json(updatedSubscriber);
+    } catch (err) {
+        res.status(400).json({ message: err.message});
+    }
 });
 
 // Delete one subscriber
